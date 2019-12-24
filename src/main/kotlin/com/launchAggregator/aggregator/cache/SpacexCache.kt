@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.Executors
 
-
 @Service
 class SpacexCache(private val spacexClient: SpacexClient) {
     private val cacheInstance = Caffeine.newBuilder()

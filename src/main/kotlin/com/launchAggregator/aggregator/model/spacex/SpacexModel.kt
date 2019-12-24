@@ -3,7 +3,6 @@ package com.launchAggregator.aggregator.model.spacex
 import com.launchAggregator.aggregator.model.Orbit
 import com.launchAggregator.aggregator.model.Orbit.UNKNOWN
 
-
 data class SpacexModel (
     val flight_number: Int = 0,
     val mission_name: String? = "",
