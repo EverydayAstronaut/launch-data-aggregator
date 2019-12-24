@@ -1,0 +1,10 @@
+feign:
+  client:
+    config:
+      spacex:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+app:
+  spacex:
+    url: https://api.spacexdata.com/v3/launches

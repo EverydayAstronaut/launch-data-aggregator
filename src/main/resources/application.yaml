@@ -8,10 +8,11 @@ feign:
 app:
   spacex:
     url: https://api.spacexdata.com/v3/launches
-  launchlibrary:
+  launchLibrary:
     base: https://www.launchlibrary.net/1.4
     sub:
-      mission: /mission?launchid=
-      launch: /launch?id=
-      missiontype: /missiontype
-      agency: /lsp?id= #LSP stands for launch service provider
+      mission: /mission
+      launch: /launch/next/50
+      missionType: /missiontype
+      agency: /lsp #LSP stands for launch service provider
+      agencyType: /agencytype

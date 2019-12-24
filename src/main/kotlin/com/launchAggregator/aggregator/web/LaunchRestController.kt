@@ -1,7 +1,7 @@
 package com.launchAggregator.aggregator.web
 
 import com.launchAggregator.aggregator.model.LaunchDataPage
-import com.launchAggregator.aggregator.model.SpacexModel
+import com.launchAggregator.aggregator.model.spacex.SpacexModel
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired

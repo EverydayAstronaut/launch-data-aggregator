@@ -1,7 +1,7 @@
 package com.launchAggregator.aggregator.web
 
 import com.launchAggregator.aggregator.cache.SpacexCache
-import com.launchAggregator.aggregator.model.SpacexModel
+import com.launchAggregator.aggregator.model.spacex.SpacexModel
 import org.springframework.stereotype.Service
 
 

@@ -1,5 +1,6 @@
 package com.launchAggregator.aggregator.model
 
+import com.launchAggregator.aggregator.model.spacex.SpacexModel
 import mu.KotlinLogging
 
 private val log = KotlinLogging.logger {}

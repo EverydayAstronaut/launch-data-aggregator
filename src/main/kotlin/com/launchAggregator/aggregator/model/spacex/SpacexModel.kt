@@ -1,5 +1,6 @@
-package com.launchAggregator.aggregator.model
+package com.launchAggregator.aggregator.model.spacex
 
+import com.launchAggregator.aggregator.model.Orbit
 import com.launchAggregator.aggregator.model.Orbit.UNKNOWN
 
 
@@ -14,10 +15,10 @@ data class SpacexModel (
 )
 
 data class Rocket(
-    val rocket_name: String = "",
-    val first_stage: FirstStage = FirstStage(),
-    val second_stage: SecondStage = SecondStage(),
-    val fairings: Fairings = Fairings()
+        val rocket_name: String = "",
+        val first_stage: FirstStage = FirstStage(),
+        val second_stage: SecondStage = SecondStage(),
+        val fairings: Fairings = Fairings()
 )
 
 data class FirstStage(
@@ -41,12 +42,12 @@ data class SecondStage(
 )
 
 data class Payload(
-    val payload_id: String? = null,
-    val payload_mass_kg: Int = 0,
-    val orbit: Orbit = UNKNOWN,
-    val customers: List<String> = listOf(),
-    val payload_type: String? = null,
-    val manufacturer: String? = null
+        val payload_id: String? = null,
+        val payload_mass_kg: Int = 0,
+        val orbit: Orbit = UNKNOWN,
+        val customers: List<String> = listOf(),
+        val payload_type: String? = null,
+        val manufacturer: String? = null
 )
 
 data class Fairings(

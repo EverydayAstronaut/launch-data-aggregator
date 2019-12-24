@@ -1,7 +1,7 @@
 package com.launchAggregator.aggregator.cache
 
 import com.launchAggregator.aggregator.client.SpacexClient
-import com.launchAggregator.aggregator.model.SpacexModel
+import com.launchAggregator.aggregator.model.spacex.SpacexModel
 import com.github.benmanes.caffeine.cache.Caffeine
 import org.springframework.stereotype.Service
 import java.util.concurrent.TimeUnit
