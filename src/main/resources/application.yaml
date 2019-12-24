@@ -1,0 +1,17 @@
+feign:
+  client:
+    config:
+      spacex:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+app:
+  spacex:
+    url: https://api.spacexdata.com/v3/launches
+  launchlibrary:
+    base: https://www.launchlibrary.net/1.4
+    sub:
+      mission: /mission?launchid=
+      launch: /launch?id=
+      missiontype: /missiontype
+      agency: /lsp?id= #LSP stands for launch service provider
