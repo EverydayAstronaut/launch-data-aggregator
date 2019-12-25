@@ -17,7 +17,7 @@ todo
 todo
 
 ### Known issues
-none
+[![GitHub issues open](https://img.shields.io/github/issues/launch-data-aggregator/shconfparser.svg?maxAge=2592000)](https://github.com/Jmaasy/launch-data-aggregator/issues)
 
 ### Improvements
 - Cache the launches when converted instead of when requested
