@@ -21,6 +21,7 @@ todo
 
 ### Improvements
 - Cache the launches when converted instead of when requested
+- Remove the 2 caches and implement only 1 cache which contains the total data of the next 50 launches
 - Look into GraphQL
 - Add 2 cronjobs to 
 	- Update the next 50 launches in the cache
