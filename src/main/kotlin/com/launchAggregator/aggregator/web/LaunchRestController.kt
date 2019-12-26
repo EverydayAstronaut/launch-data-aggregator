@@ -2,6 +2,7 @@ package com.launchAggregator.aggregator.web
 
 import com.launchAggregator.aggregator.model.LaunchDataPage
 import com.launchAggregator.aggregator.model.spacex.SpacexModel
+import com.launchAggregator.aggregator.util.LaunchDataAggregator
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,11 +18,7 @@ class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggreg
         @ApiParam(value = "Identifier of the launch")
         @RequestParam(required = false) id: Int? = null
     ): LaunchDataPage {
-        val launchData: List<SpacexModel>
-        when(id) {
-            null -> launchData = launchDataAggregator.getSpacexData()
-            else -> launchData = listOf(launchDataAggregator.getSpacexData(id))
-        }
+        val launchData: List<SpacexModel> =  launchDataAggregator.getSpacexData(id)
         return LaunchDataPage(launchData.size, launchData)
     }
 }

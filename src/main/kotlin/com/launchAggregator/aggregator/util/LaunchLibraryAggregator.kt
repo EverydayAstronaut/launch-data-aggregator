@@ -12,21 +12,16 @@ import org.springframework.stereotype.Component
 class LaunchLibraryAggregator(val launchClient: LaunchClient) {
     fun aggregate(launchData: List<Launch>, missionTypeData: List<MissionType>): List<LaunchData> {
         val launchDataList = mutableListOf<LaunchData>()
-
         launchData.forEach {
-            val agency = it.lsp
-            val agencyType = launchClient.getAgencyTypes(agency.id).types
+            val agencyType = launchClient.getAgencyTypes(it.lsp.id).types
             val mission = launchClient.getMission(it.id).missions
-            val launchData = when {
-                agencyType.isNotEmpty() && mission.isNotEmpty() -> LaunchData(it, mission.first(), agency, agencyType.first())
-                agencyType.isNotEmpty() -> LaunchData(it, Mission(), agency, agencyType.first())
-                mission.isNotEmpty() -> LaunchData(it, mission.first(), agency, AgencyType())
-                else -> LaunchData(it, Mission(), agency, AgencyType())
-            }
-
-            launchDataList.add(launchData)
+            launchDataList.add(when {
+                agencyType.isNotEmpty() && mission.isNotEmpty() -> LaunchData(it, mission.first(), it.lsp, agencyType.first())
+                agencyType.isNotEmpty() -> LaunchData(it, Mission(), it.lsp, agencyType.first())
+                mission.isNotEmpty() -> LaunchData(it, mission.first(), it.lsp, AgencyType())
+                else -> LaunchData(it, Mission(), it.lsp, AgencyType())
+            })
         }
-
         return launchDataList
     }
 }
