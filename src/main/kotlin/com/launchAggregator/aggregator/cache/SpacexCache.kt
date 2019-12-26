@@ -19,8 +19,7 @@ class SpacexCache(private val spacexClient: SpacexClient) {
 
     fun getIndividualLaunch(id: Int): SpacexModel {
         val launches = getLaunches()
-        return launches.first()
-//        return launches.find { it.flight_number == id }?: SpacexModel()
+        return launches.find { it.flight_number == id }?: SpacexModel()
     }
 
     fun getAllLaunches(): List<SpacexModel> {

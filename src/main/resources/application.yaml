@@ -9,10 +9,4 @@ app:
   spacex:
     url: https://api.spacexdata.com/v3/launches
   launchLibrary:
-    base: https://www.launchlibrary.net/1.4
-    sub:
-      mission: /mission
-      launch: /launch/next/50
-      missionType: /missiontype
-      agency: /lsp #LSP stands for launch service provider
-      agencyType: /agencytype
+    url: https://www.launchlibrary.net/1.4

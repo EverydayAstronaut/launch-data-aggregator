@@ -1,4 +1,4 @@
-package com.launchAggregator.aggregator.model
+package com.launchAggregator.aggregator.model.launchLibrary
 
 data class Agency (
         val id: Int = 0,

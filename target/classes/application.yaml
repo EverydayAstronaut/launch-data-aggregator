@@ -8,3 +8,5 @@ feign:
 app:
   spacex:
     url: https://api.spacexdata.com/v3/launches
+  launchLibrary:
+    url: https://www.launchlibrary.net/1.4
