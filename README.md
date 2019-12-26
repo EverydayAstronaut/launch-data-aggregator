@@ -22,3 +22,6 @@ todo
 ### Improvements
 - Cache the launches when converted instead of when requested
 - Look into GraphQL
+- Add 2 cronjobs to 
+	- Update the next 50 launches in the cache
+	- Validate the launch time each hour (when in last hour each minute) on the date of launch
