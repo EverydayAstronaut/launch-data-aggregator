@@ -1,7 +1,7 @@
 package com.launchAggregator.aggregator.util
 
 import com.launchAggregator.aggregator.client.LaunchClient
-import com.launchAggregator.aggregator.model.MissionType
+import com.launchAggregator.aggregator.model.launchLibrary.MissionType
 import com.launchAggregator.aggregator.model.launchLibrary.AgencyType
 import com.launchAggregator.aggregator.model.launchLibrary.Launch
 import com.launchAggregator.aggregator.model.launchLibrary.LaunchData

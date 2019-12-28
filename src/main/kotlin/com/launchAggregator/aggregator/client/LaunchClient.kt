@@ -1,6 +1,6 @@
 package com.launchAggregator.aggregator.client
 
-import com.launchAggregator.aggregator.model.MissionTypeDataWrapper
+import com.launchAggregator.aggregator.model.launchLibrary.MissionTypeDataWrapper
 import com.launchAggregator.aggregator.model.launchLibrary.*
 
 import org.springframework.cloud.openfeign.FeignClient
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam
 interface LaunchClient {
     @GetMapping("launch/next/50")
     fun getLaunches(): LaunchDataWrapper
+
+    @GetMapping("launch/next/50")
+    fun getLaunches2(): Any
 
     @GetMapping("mission")
     fun getMission(@RequestParam("launchid") id: Int): MissionDataWrapper

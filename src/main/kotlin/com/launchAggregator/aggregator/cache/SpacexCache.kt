@@ -4,8 +4,14 @@ import com.launchAggregator.aggregator.client.SpacexClient
 import com.launchAggregator.aggregator.model.spacex.SpacexModel
 import com.github.benmanes.caffeine.cache.Caffeine
 import org.springframework.stereotype.Service
+import java.security.Timestamp
+import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.Executors
+import java.util.TimeZone
+import java.time.Instant
+
+
 
 @Service
 class SpacexCache(private val spacexClient: SpacexClient) {
@@ -17,9 +23,12 @@ class SpacexCache(private val spacexClient: SpacexClient) {
             .recordStats()
             .build<String, List<SpacexModel>>()
 
-    fun getIndividualLaunch(id: Int): SpacexModel {
+    fun getIndividualLaunch(dateTime: LocalDateTime): SpacexModel {
         val launches = getLaunches()
-        return launches.find { it.flight_number == id }?: SpacexModel()
+        return launches.find {
+            val time = LocalDateTime.ofInstant(Instant.ofEpochMilli(it.launch_date_unix!!.toLong() * 1000), TimeZone.getTimeZone("618").toZoneId())
+            (time.dayOfMonth == dateTime.dayOfMonth && time.month == dateTime.month && time.year == dateTime.year)
+        }?: SpacexModel()
     }
 
     fun getAllLaunches(): List<SpacexModel> {

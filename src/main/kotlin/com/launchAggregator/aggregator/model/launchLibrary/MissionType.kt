@@ -1,4 +1,4 @@
-package com.launchAggregator.aggregator.model
+package com.launchAggregator.aggregator.model.launchLibrary
 
 data class MissionType(
         val id: Int = 0,
