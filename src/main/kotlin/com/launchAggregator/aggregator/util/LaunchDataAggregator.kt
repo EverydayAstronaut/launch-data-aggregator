@@ -4,6 +4,7 @@ import com.launchAggregator.aggregator.cache.LaunchDataCache
 import com.launchAggregator.aggregator.dao.SpacexDao
 import com.launchAggregator.aggregator.dao.LaunchLibraryDao
 import com.launchAggregator.aggregator.model.LaunchData
+import com.launchAggregator.aggregator.model.MinimalLaunchData
 import com.launchAggregator.aggregator.model.Mission
 import org.springframework.stereotype.Service
 
@@ -14,11 +15,36 @@ class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private
         return launchDataCache.getAllLaunches()?: getLaunchDataCronJob()
     }
 
-    fun getIndividualLaunches(id: Int): LaunchData {
-        return launchDataCache.getIndividualLaunch(id)?: getLaunchDataCronJob().find { it.id == id } ?: LaunchData()
+    fun getIndividualLaunch(id: Int): LaunchData {
+        return launchDataCache.getIndividualLaunch(id)?: getLaunchDataCronJob().find { it.id == id }?: LaunchData()
     }
 
-    fun getLaunchDataCronJob(): List<LaunchData> {
+    fun getMinimalIndividualLaunch(id: Int): MinimalLaunchData {
+        return launchDataCache.getMinimalIndividualLaunch(id) ?: when (val launchNew = getLaunchDataCronJob().find { it.id == id }) {
+            null -> MinimalLaunchData()
+            else -> MinimalLaunchData(
+                    launchNew.id,
+                    launchNew.name,
+                    launchNew.missions.map { it.orbit },
+                    launchNew.net,
+                    launchNew.rocket.agency
+            )
+        }
+    }
+
+    fun getMinimalLaunches(): List<MinimalLaunchData> {
+        return launchDataCache.getMinimalLaunches()?: getLaunchDataCronJob().map {
+            MinimalLaunchData(
+                    it.id,
+                    it.name,
+                    it.missions.map { it.orbit },
+                    it.net,
+                    it.rocket.agency
+            )
+        }
+    }
+
+    private fun getLaunchDataCronJob(): List<LaunchData> {
         val spacexDataList = spacexDao.getLaunchData()
         val launchLibraryData = launchLibraryDao.getLaunchData()
 

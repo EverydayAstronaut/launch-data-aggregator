@@ -18,7 +18,7 @@ class LaunchDataCache {
             .build<Int, LaunchData>()
 
     fun getIndividualLaunch(id: Int): LaunchData? {
-        return launchCache.getIfPresent(id)?: null
+        return launchCache.getIfPresent(id)
     }
 
     fun getAllLaunches(): List<LaunchData>? {
@@ -29,16 +29,31 @@ class LaunchDataCache {
         }
     }
 
-    // TODO: LOOK AT WHAT IS NECESSARY IN THIS MODEL. THIS HAS YET TO BE DETERMINED
-    fun getAllLaunchesListView(): List<MinimalLaunchData> {
+    fun getMinimalIndividualLaunch(id: Int): MinimalLaunchData? {
+        val launch = launchCache.getIfPresent(id) ?: return null
+        return MinimalLaunchData(
+                launch.id,
+                launch.name,
+                launch.missions.map { mission -> mission.orbit },
+                launch.net,
+                launch.rocket.agency
+        )
+    }
+
+    fun getMinimalLaunches(): List<MinimalLaunchData>? {
         val launches =  launchCache.asMap().values.toList()
-        return launches.map { MinimalLaunchData(
-                it.id,
-                it.name,
-                it.missions.map { mission -> mission.orbit },
-                it.net,
-                it.rocket.agency
-        ) }
+        return when {
+            launches.isEmpty() -> null
+            else -> launches.map {
+                MinimalLaunchData(
+                        it.id,
+                        it.name,
+                        it.missions.map { mission -> mission.orbit },
+                        it.net,
+                        it.rocket.agency
+                )
+            }
+        }
     }
 
     fun addAll(launchData: List<LaunchData>) {
