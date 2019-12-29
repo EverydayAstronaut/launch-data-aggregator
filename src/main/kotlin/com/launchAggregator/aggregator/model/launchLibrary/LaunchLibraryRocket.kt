@@ -1,6 +1,6 @@
 package com.launchAggregator.aggregator.model.launchLibrary
 
-data class Rocket(
+data class LaunchLibraryRocket(
         val id: Int = 0,
         val name: String = "",
         val configuration: String = "",

@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients
 @SpringBootApplication(scanBasePackages=[
 	"com.launchAggregator.aggregator.cache",
 	"com.launchAggregator.aggregator.client",
+	"com.launchAggregator.aggregator.dao",
 	"com.launchAggregator.aggregator.model",
 	"com.launchAggregator.aggregator.util",
 	"com.launchAggregator.aggregator.web"

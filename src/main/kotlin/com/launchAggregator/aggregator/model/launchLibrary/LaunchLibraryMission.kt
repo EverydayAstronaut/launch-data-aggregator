@@ -1,6 +1,6 @@
 package com.launchAggregator.aggregator.model.launchLibrary
 
-data class Mission(
+data class LaunchLibraryMission(
         val id: Int = 0,
         val name: String = "",
         val description: String = "",
@@ -8,6 +8,6 @@ data class Mission(
         val infoUrl: String = ""
 )
 
-data class MissionDataWrapper(
-        val missions: List<Mission> = listOf()
+data class LaunchLibraryMissionDataWrapper(
+        val missions: List<LaunchLibraryMission> = listOf()
 )
