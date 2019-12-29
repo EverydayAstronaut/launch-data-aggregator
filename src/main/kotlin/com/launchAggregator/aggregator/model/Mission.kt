@@ -1,6 +1,9 @@
 package com.launchAggregator.aggregator.model
 
 data class Mission(
-    val mission_name: String = "",
-    val mission_description: String = ""
+        val id: Int = 0,
+        val name: String = "",
+        val description: String = "",
+        var orbit: Orbit = Orbit.UNKNOWN,
+        val company: String = ""
 )
