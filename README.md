@@ -89,7 +89,7 @@ todo
                     "attempt": true,
                     "onShip": false,
                     "location": [
-                        null
+                        "unknown"
                     ],
                     "recovered": false
                 },
