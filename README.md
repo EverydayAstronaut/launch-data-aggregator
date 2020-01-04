@@ -118,7 +118,7 @@
   
 #### Get launches essential only
 * **URL**
-  https://JOHNDOE.com/api/v1/launch-minimal
+  https://JOHNDOE.com/api/v1/launch/minimal
 * **Method:**
   `GET`
 * **URL Params**
