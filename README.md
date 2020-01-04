@@ -12,9 +12,11 @@
 - Cronjob which validates the launch time
 
 ### Usage
-todo
+#### Endpoints
+- https://JOHNDOE.com/api/v1/launch (id: Int)
+- https://JOHNDOE.com/api/v1/launch-minimal (id: Int)
 
-### Return model example
+#### Return model example
 ```json
 {
     "totalCount": 50,
