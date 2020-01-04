@@ -20,14 +20,6 @@
 * **URL Params**
   **Optional:**
   `id=[integer]`
-  
-* **URL**
-  https://JOHNDOE.com/api/v1/launch-minimal
-* **Method:**
-  `GET`
-* **URL Params**
-  **Optional:**
-  `id=[integer]`
 * **Success Response:**
 ```json
    {
@@ -118,6 +110,37 @@
                            "recovered": false
                        }
                    ]
+               }
+           }
+       ]
+   }
+```
+  
+* **URL**
+  https://JOHNDOE.com/api/v1/launch-minimal
+* **Method:**
+  `GET`
+* **URL Params**
+  **Optional:**
+  `id=[integer]`
+* **Success Response:**
+```json
+   {
+       "totalCount": 1,
+       "launches": [
+           {
+               "id": 1962,
+               "name": "Falcon 9 Block 5 | Starlink 2",
+               "orbit": [
+                   "VLEO"
+               ],
+               "net": "2020-01-07T02:19:00",
+               "agency": {
+                   "name": "SpaceX",
+                   "short": "SpX",
+                   "type": 3,
+                   "location": "USA",
+                   "lsp": false
                }
            }
        ]
