@@ -31,5 +31,5 @@ todo
 - Add sorting
 
 ### Dependencies
-Spacex data API: https://github.com/r-spacex/SpaceX-API
-LaunchLibrary API: http://launchlibrary.net/docs/1.4.1/api.html
+- Spacex data API: https://github.com/r-spacex/SpaceX-API
+- LaunchLibrary API: http://launchlibrary.net/docs/1.4.1/api.html
