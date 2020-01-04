@@ -122,6 +122,7 @@ todo
 - Look into GraphQL
 - Add routing to return the daily launches
 - Add sorting
+- The recovery info of the fairing and cores are the same which results in the fairing having a core serial which is not needed. Should be something to look into
 
 ### Dependencies
 - Spacex data API: https://github.com/r-spacex/SpaceX-API
