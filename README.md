@@ -11,8 +11,8 @@
 - Cronjob which checks the daily launches
 - Cronjob which validates the launch time
 
-### Usage
-#### Endpoints
+### Endpoints
+#### Get launches with all data
 * **URL**
   https://JOHNDOE.com/api/v1/launch
 * **Method:**
@@ -116,6 +116,7 @@
    }
 ```
   
+#### Get launches essential only
 * **URL**
   https://JOHNDOE.com/api/v1/launch-minimal
 * **Method:**
@@ -146,6 +147,9 @@
        ]
    }
 ```
+
+### Usage
+todo
 
 ### Known issues
 [![GitHub issues open](https://img.shields.io/github/issues/Jmaasy/launch-data-aggregator/shconfparser.svg?maxAge=2592000&style=for-the-badge&logo=appveyor)](https://github.com/Jmaasy/launch-data-aggregator/issues)
