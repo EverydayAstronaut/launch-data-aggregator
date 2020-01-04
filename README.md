@@ -13,8 +13,8 @@
 
 ### Usage
 #### Endpoints
-- https://JOHNDOE.com/api/v1/launch (id: Int)
-- https://JOHNDOE.com/api/v1/launch-minimal (id: Int)
+- https://JOHNDOE.com/api/v1/launch (id: Int **optional**)
+- https://JOHNDOE.com/api/v1/launch-minimal (id: Int **optional**)
 
 #### Return model example
 ```json
