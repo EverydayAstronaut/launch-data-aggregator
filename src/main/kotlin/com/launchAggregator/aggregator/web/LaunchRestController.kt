@@ -27,7 +27,7 @@ class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggreg
     }
 
     @ApiOperation(value = "Get purchases...", notes = "Get online and offline purchases for the member.")
-    @GetMapping("/v1/launch/minimal")
+    @GetMapping("/minimal")
     fun getMinimalLaunchData(
             @ApiParam(value = "Identifier of the launch")
             @RequestParam(required = false) id: Int? = null
