@@ -20,10 +20,7 @@ class SpacexDao(private val spacexClient: SpacexClient) {
                 else -> LocalDateTime.ofInstant(Instant.ofEpochMilli(spacexModel.launch_date_unix!!.toLong() * 1000), TimeZone.getTimeZone("618").toZoneId())
             }
 
-            val cores = spacexModel.rocket.first_stage.cores.map { core ->
-                if(core == null) SpacexCore()
-                else core
-            }
+            val cores = spacexModel.rocket.first_stage.cores.map { core -> core ?: SpacexCore() }
 
             val rocket = Rocket(
                     cores = cores.map { core ->
@@ -50,6 +47,7 @@ class SpacexDao(private val spacexClient: SpacexClient) {
                             recovered = fairings.recovered
                     ),
                     cores.map { core -> RecoveryInfo(
+                            serial = core.core_serial?: "",
                             attempt = core.landing_intent,
                             location = listOf(core.landing_vehicle),
                             recovered = core.land_success,
