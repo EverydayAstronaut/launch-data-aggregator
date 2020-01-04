@@ -18,8 +18,8 @@ class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggreg
         @ApiParam(value = "Identifier of the launch")
         @RequestParam(required = false) id: Int? = null
     ): LaunchDataPage {
-        val launchData = when(id) {
-            null -> launchDataAggregator.getAllLaunches()
+        val launchData = when {
+            id == null -> launchDataAggregator.getAllLaunches()
             else -> listOf(launchDataAggregator.getIndividualLaunch(id))
         }
 
@@ -27,13 +27,10 @@ class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggreg
     }
 
     @ApiOperation(value = "Get purchases...", notes = "Get online and offline purchases for the member.")
-    @GetMapping("/list-view")
-    fun getLaunchDataMinimal(
+    @GetMapping("/v1/launch/minimal")
+    fun getMinimalLaunchData(
             @ApiParam(value = "Identifier of the launch")
-            @RequestParam(required = false) id: Int? = null,
-
-            @ApiParam(value = "Whether a minimal result is wanted")
-            @RequestParam(required = false) minimal: Boolean? = null
+            @RequestParam(required = false) id: Int? = null
     ): LaunchDataPageMinimal {
         val launchData = when(id) {
             null -> launchDataAggregator.getMinimalLaunches()
