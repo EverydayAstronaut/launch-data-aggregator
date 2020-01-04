@@ -3,6 +3,7 @@ package com.launchAggregator.aggregator
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.openfeign.EnableFeignClients
+import org.springframework.scheduling.annotation.EnableScheduling
 
 
 @SpringBootApplication(scanBasePackages=[
@@ -14,6 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients
 	"com.launchAggregator.aggregator.web"
 ])
 @EnableFeignClients
+@EnableScheduling
 class AggregatorApplication
 
 fun main(args: Array<String>) {

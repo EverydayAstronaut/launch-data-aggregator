@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 class LaunchLibraryDao(private val launchClient: LaunchClient, private val dateParser: DateParser) {
     fun getLaunchData(): List<LaunchData> {
         val launchData = launchClient.getLaunches().launches
+
         return launchData.map {
             val location = Location(
                     it.location.name,
@@ -48,7 +49,8 @@ class LaunchLibraryDao(private val launchClient: LaunchClient, private val dateP
                     it.status,
                     location,
                     missions,
-                    rocket
+                    rocket,
+                    Recovery()
             )
         }
     }
