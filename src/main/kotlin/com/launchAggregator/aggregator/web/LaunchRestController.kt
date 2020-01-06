@@ -8,11 +8,10 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
-
 @RestController
 @RequestMapping("/v1/launch")
 class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggregator) {
-    @ApiOperation(value = "Get purchases...", notes = "Get online and offline purchases for the member.")
+    @ApiOperation(value = "Get all the launches")
     @GetMapping
     fun getLaunchData(
         @ApiParam(value = "Identifier of the launch")
@@ -26,7 +25,7 @@ class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggreg
         return LaunchDataPage(launchData.size, launchData)
     }
 
-    @ApiOperation(value = "Get purchases...", notes = "Get online and offline purchases for the member.")
+    @ApiOperation(value = "Get all the launches with only essential data")
     @GetMapping("/minimal")
     fun getMinimalLaunchData(
             @ApiParam(value = "Identifier of the launch")
@@ -38,5 +37,12 @@ class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggreg
         }
 
         return LaunchDataPageMinimal(launchData.size, launchData)
+    }
+
+    @ApiOperation(value = "Get all the launches of today")
+    @GetMapping("/daily")
+    fun getDailyLaunches(): LaunchDataPage {
+        val launchData = launchDataAggregator.dailyLaunches?: listOf()
+        return LaunchDataPage(launchData.size, launchData)
     }
 }

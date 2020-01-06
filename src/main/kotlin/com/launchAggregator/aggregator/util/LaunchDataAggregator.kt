@@ -111,7 +111,7 @@ class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private
     fun checkDailyLaunches() {
         log.info("checking daily launches")
         val launches = launchDataCache.getAllLaunches()
-        dailyLaunches = launches?.filter { it.net.isEqual(LocalDateTime.now(ZoneOffset.UTC)) }
+        dailyLaunches = launches?.filter { it.net.dayOfMonth == LocalDateTime.now(ZoneOffset.UTC).dayOfMonth }
         log.info("these are the daily launches: ${dailyLaunches?.map { it.name }}")
     }
 
