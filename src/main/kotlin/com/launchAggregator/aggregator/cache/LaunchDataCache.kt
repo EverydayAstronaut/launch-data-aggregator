@@ -26,11 +26,7 @@ class LaunchDataCache {
     }
 
     fun getAllLaunches(): List<LaunchData>? {
-        val entries = launchCache.asMap().values.toList().map { it }
-        return when {
-            entries.isEmpty() -> null
-            else -> entries
-        }
+        return launchCache.asMap().values.toList().map { it }
     }
 
     fun getMinimalIndividualLaunch(id: Int): MinimalLaunchData? {
