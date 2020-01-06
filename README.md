@@ -163,6 +163,9 @@ todo
 - Look into GraphQL
 - Add routing to return the daily launches
 - Add sorting
+- Add timezone to request which will automatically convert the launchtime to the users timezone
+- When spacex launch compare the 2 descriptions and return the most detailed
+- When not a spacex launch, attempt to find orbit ( only default present on spacex launches ATM )
 - The recovery info of the fairing and cores are the same which results in the fairing having a core serial which is not needed. Should be something to look into
 
 ### Dependencies
