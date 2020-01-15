@@ -153,7 +153,7 @@ todo
 
 ### Known issues
 [![GitHub issues open](https://img.shields.io/github/issues/Jmaasy/launch-data-aggregator/shconfparser.svg?maxAge=2592000&style=for-the-badge&logo=appveyor)](https://github.com/Jmaasy/launch-data-aggregator/issues)
-
+ 
 ### Improvements
 - **DONE** | Cache the launches when converted instead of when requested
 - **DONE** | Remove the 2 caches and implement only 1 cache which contains the total data of the next 50 launches
