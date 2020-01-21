@@ -160,8 +160,8 @@ todo
 - **DONE** | Add 2 cronjobs to 
 	- Update the next 50 launches in the cache
 	- Validate the launch time each hour (when in last hour each minute) on the date of launch
-- When not a spacex launch, attempt to find orbit ( only default present on spacex launches ATM )
 - **DONE** | Add routing to return the daily launches
+- When not a spacex launch, attempt to find orbit ( only default present on spacex launches ATM )
 - **WILL MAYBE IMPLEMENTED** | sorting
 - **WILL MAYBE IMPLEMENTED** | Add timezone to request which will automatically convert the launchtime to the users timezone
 - **WILL MAYBE IMPLEMENTED** | When spacex launch compare the 2 descriptions and return the most detailed
