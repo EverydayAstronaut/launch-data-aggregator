@@ -153,20 +153,19 @@ todo
 
 ### Known issues
 [![GitHub issues open](https://img.shields.io/github/issues/Jmaasy/launch-data-aggregator/shconfparser.svg?maxAge=2592000&style=for-the-badge&logo=appveyor)](https://github.com/Jmaasy/launch-data-aggregator/issues)
-
+ 
 ### Improvements
 - **DONE** | Cache the launches when converted instead of when requested
 - **DONE** | Remove the 2 caches and implement only 1 cache which contains the total data of the next 50 launches
 - **DONE** | Add 2 cronjobs to 
 	- Update the next 50 launches in the cache
 	- Validate the launch time each hour (when in last hour each minute) on the date of launch
-- Look into GraphQL
-- Add routing to return the daily launches
-- Add sorting
-- Add timezone to request which will automatically convert the launchtime to the users timezone
-- When spacex launch compare the 2 descriptions and return the most detailed
+- **DONE** | Add routing to return the daily launches
 - When not a spacex launch, attempt to find orbit ( only default present on spacex launches ATM )
-- The recovery info of the fairing and cores are the same which results in the fairing having a core serial which is not needed. Should be something to look into
+- **WILL MAYBE IMPLEMENTED** | sorting
+- **WILL MAYBE IMPLEMENTED** | Add timezone to request which will automatically convert the launchtime to the users timezone
+- **WILL MAYBE IMPLEMENTED** | When spacex launch compare the 2 descriptions and return the most detailed
+- **WILL MAYBE IMPLEMENTED** | Look into GraphQL
 
 ### Dependencies
 - Spacex data API: https://github.com/r-spacex/SpaceX-API
