@@ -12,7 +12,8 @@ import org.springframework.scheduling.annotation.EnableScheduling
 	"com.launchAggregator.aggregator.dao",
 	"com.launchAggregator.aggregator.model",
 	"com.launchAggregator.aggregator.util",
-	"com.launchAggregator.aggregator.web"
+	"com.launchAggregator.aggregator.web",
+	"com.launchAggregator.aggregator.config"
 ])
 @EnableFeignClients
 @EnableScheduling

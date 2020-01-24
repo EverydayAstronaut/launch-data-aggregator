@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1/launch")
+@RequestMapping("/v1/launches")
+@CrossOrigin(origins = ["http://localhost:8888"])
 class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggregator) {
     @ApiOperation(value = "Get all the launches")
     @GetMapping

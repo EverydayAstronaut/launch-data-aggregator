@@ -6,6 +6,7 @@ import com.launchAggregator.aggregator.dao.LaunchLibraryDao
 import com.launchAggregator.aggregator.model.LaunchData
 import com.launchAggregator.aggregator.model.MinimalLaunchData
 import com.launchAggregator.aggregator.model.Mission
+import com.launchAggregator.aggregator.model.Orbit
 import mu.KotlinLogging
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit
 private val log = KotlinLogging.logger {}
 
 @Service
-class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private val spacexDao: SpacexDao, private val launchLibraryDao: LaunchLibraryDao, private val dateParser: DateParser) {
+class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private val spacexDao: SpacexDao, private val launchLibraryDao: LaunchLibraryDao, private val dateParser: DateParser, private val orbitFinder: OrbitFinder) {
     var dailyLaunches: List<LaunchData>? = null
 
     fun getAllLaunches(): List<LaunchData> {
@@ -66,14 +67,14 @@ class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private
             if(launchData.rocket.agency.short == "SpX") {
                 val launch = spacexDataList.find { it.net.year == launchData.net.year && it.net.month == launchData.net.month && it.net.dayOfMonth == launchData.net.dayOfMonth  }
                 when {
-                    launchData.missions.isEmpty() && launch != null -> {
+                    launchData.missions.isEmpty() && launch != null ->   {
                         launchData.missions = launch.missions
                     }
                     launch != null -> {
                         val missions = mutableListOf<Mission>()
 
                         for((k,v) in launchData.missions.withIndex()) {
-                            v.orbit = launch.missions[k].orbit
+                            v.orbit = orbitFinder.find(launch.missions[k].description, launch.missions[k].orbit)
                             missions.add(v)
                         }
 
@@ -85,7 +86,7 @@ class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private
                     val missions = mutableListOf<Mission>()
 
                     for((k,v) in launchData.missions.withIndex()) {
-                        v.orbit = launch.missions[k].orbit
+                        v.orbit = orbitFinder.find(launch.missions[k].description, launch.missions[k].orbit)
                         missions.add(v)
                     }
 
