@@ -51,10 +51,7 @@ class SpacexDao(private val spacexClient: SpacexClient) {
                             attempt = core.landing_intent,
                             location = listOf(core.landing_vehicle),
                             recovered = core.land_success,
-                            onShip = when {
-                                core.landing_type == "ASDS" -> true
-                                else -> false
-                            }
+                            onShip = core.landing_type == "ASDS" || core.landing_type == "OCISLY"
                     )}
             )
 

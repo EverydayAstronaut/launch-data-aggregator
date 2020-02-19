@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/v1/launches")
-@CrossOrigin(origins = ["http://localhost:8888"])
+@CrossOrigin(origins = ["http://localhost:8888", "everydayastronaut.com"])
 class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggregator) {
     @ApiOperation(value = "Get all the launches")
     @GetMapping
@@ -18,6 +18,7 @@ class LaunchRestController(@Autowired val launchDataAggregator: LaunchDataAggreg
         @ApiParam(value = "Identifier of the launch")
         @RequestParam(required = false) id: Int? = null
     ): LaunchDataPage {
+
         val launchData = when {
             id == null -> launchDataAggregator.getAllLaunches()
             else -> listOf(launchDataAggregator.getIndividualLaunch(id))

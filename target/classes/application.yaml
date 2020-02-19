@@ -7,6 +7,6 @@ feign:
 
 app:
   spacex:
-    url: https://api.spacexdata.com/v3/launches
+    url: https://api.spacexdata.com/v3/launches/upcoming
   launchLibrary:
     url: https://www.launchlibrary.net/1.4
