@@ -9,4 +9,4 @@ app:
   spacex:
     url: https://api.spacexdata.com/v3/launches/upcoming
   launchLibrary:
-    url: https://www.launchlibrary.net/1.4
+    url: https://launchlibrary.net/1.4
