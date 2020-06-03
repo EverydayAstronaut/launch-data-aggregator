@@ -9,4 +9,11 @@ app:
   spacex:
     url: https://api.spacexdata.com/v3/launches/upcoming
   launchLibrary:
-    url: https://www.launchlibrary.net/1.4
+    url: https://launchlibrary.net/1.4
+
+server.ssl:
+  key-store-type: JKS
+  key-store: classpath:launchaggregator.jks
+  key-store-password: everydayastronaut
+  key-alias: launchaggregator
+  enabled: true
