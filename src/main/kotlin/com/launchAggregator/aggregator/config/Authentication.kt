@@ -18,7 +18,6 @@ class SpringSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
                 .addFilterBefore(Cors(), ChannelProcessingFilter::class.java).authorizeRequests()
-//                .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
     }
