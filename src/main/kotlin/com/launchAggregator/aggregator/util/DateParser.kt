@@ -24,9 +24,9 @@ class DateParser {
         val ms = minusSeconds.hour * 3600000 + minusSeconds.minute * 60000 + minusSeconds.second * 1000
         return when (timeUnit) {
             TimeUnit.MILLISECONDS -> ms
-            TimeUnit.SECONDS -> ms * 1000
-            TimeUnit.MINUTES -> ms * 60000
-            TimeUnit.HOURS -> ms * 3600000
+            TimeUnit.SECONDS -> ms / 1000
+            TimeUnit.MINUTES -> ms / 60000
+            TimeUnit.HOURS -> ms / 3600000
             else -> ms
         }
     }

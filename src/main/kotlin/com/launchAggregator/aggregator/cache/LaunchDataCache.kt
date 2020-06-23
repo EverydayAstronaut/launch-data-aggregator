@@ -4,6 +4,10 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import com.launchAggregator.aggregator.model.LaunchData
 import com.launchAggregator.aggregator.model.MinimalLaunchData
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -22,11 +26,7 @@ class LaunchDataCache {
     }
 
     fun getAllLaunches(): List<LaunchData>? {
-        val entries = launchCache.asMap().values.toList()
-        return when {
-            entries.isEmpty() -> null
-            else -> entries
-        }
+        return launchCache.asMap().values.toList().map { it }
     }
 
     fun getMinimalIndividualLaunch(id: Int): MinimalLaunchData? {

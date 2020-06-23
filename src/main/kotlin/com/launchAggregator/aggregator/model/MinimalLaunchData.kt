@@ -7,5 +7,6 @@ data class MinimalLaunchData(
         val name: String = "",
         val orbit: List<Orbit> = listOf(Orbit.UNKNOWN),
         val net: LocalDateTime = LocalDateTime.MIN,
-        val agency: Agency = Agency()
+        val agency: Agency = Agency(),
+        var ttl: Int = -1
 )
