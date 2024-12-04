@@ -3,12 +3,14 @@ package com.launchAggregator.aggregator.dao
 import com.launchAggregator.aggregator.client.LaunchClient
 import com.launchAggregator.aggregator.model.*
 import com.launchAggregator.aggregator.util.DateParser
+import com.launchAggregator.aggregator.util.OrbitFinder
 import org.springframework.stereotype.Service
 
 @Service
-class LaunchLibraryDao(private val launchClient: LaunchClient, private val dateParser: DateParser) {
+class LaunchLibraryDao(private val launchClient: LaunchClient, private val dateParser: DateParser, private val orbitFinder: OrbitFinder) {
     fun getLaunchData(): List<LaunchData> {
         val launchData = launchClient.getLaunches().launches
+        val missionTypes = launchClient.getMissionType().types
 
         return launchData.map {
             val location = Location(
@@ -18,10 +20,14 @@ class LaunchLibraryDao(private val launchClient: LaunchClient, private val dateP
             )
 
             val missions = it.missions.map { mission ->
+                val type = missionTypes.find { it.id  == mission.type}?.name ?: "Unknown"
+
                 Mission(
                         mission.id,
                         mission.name,
-                        mission.description
+                        type,
+                        mission.description,
+                        orbitFinder.find(mission.description, Orbit.UNKNOWN)
                 )
             }
 

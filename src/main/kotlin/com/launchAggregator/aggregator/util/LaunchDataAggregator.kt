@@ -6,6 +6,7 @@ import com.launchAggregator.aggregator.dao.LaunchLibraryDao
 import com.launchAggregator.aggregator.model.LaunchData
 import com.launchAggregator.aggregator.model.MinimalLaunchData
 import com.launchAggregator.aggregator.model.Mission
+import com.launchAggregator.aggregator.model.Orbit
 import mu.KotlinLogging
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
@@ -19,10 +20,11 @@ import java.util.concurrent.TimeUnit
 private val log = KotlinLogging.logger {}
 
 @Service
-class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private val spacexDao: SpacexDao, private val launchLibraryDao: LaunchLibraryDao, private val dateParser: DateParser) {
+class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private val spacexDao: SpacexDao, private val launchLibraryDao: LaunchLibraryDao, private val dateParser: DateParser, private val orbitFinder: OrbitFinder) {
     var dailyLaunches: List<LaunchData>? = null
 
     fun getAllLaunches(): List<LaunchData> {
+        log.info("[GET] Getting all launches")
         return launchDataCache.getAllLaunches()?: getLaunchDataCronJob()
     }
 
@@ -57,7 +59,7 @@ class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private
 
     @Scheduled(fixedDelay = 3600000)
     private fun getLaunchDataCronJob(): List<LaunchData> {
-        log.info("executing cronjob")
+        log.info("[CRONJOB] executing cronjob")
 
         val spacexDataList = spacexDao.getLaunchData()
         val launchLibraryData = launchLibraryDao.getLaunchData()
@@ -66,14 +68,14 @@ class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private
             if(launchData.rocket.agency.short == "SpX") {
                 val launch = spacexDataList.find { it.net.year == launchData.net.year && it.net.month == launchData.net.month && it.net.dayOfMonth == launchData.net.dayOfMonth  }
                 when {
-                    launchData.missions.isEmpty() && launch != null -> {
+                    launchData.missions.isEmpty() && launch != null ->   {
                         launchData.missions = launch.missions
                     }
                     launch != null -> {
                         val missions = mutableListOf<Mission>()
 
                         for((k,v) in launchData.missions.withIndex()) {
-                            v.orbit = launch.missions[k].orbit
+                            v.orbit = orbitFinder.find(launch.missions[k].description, launch.missions[k].orbit)
                             missions.add(v)
                         }
 
@@ -85,7 +87,7 @@ class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private
                     val missions = mutableListOf<Mission>()
 
                     for((k,v) in launchData.missions.withIndex()) {
-                        v.orbit = launch.missions[k].orbit
+                        v.orbit = orbitFinder.find(launch.missions[k].description, launch.missions[k].orbit)
                         missions.add(v)
                     }
 
@@ -103,28 +105,26 @@ class LaunchDataAggregator(private val launchDataCache: LaunchDataCache, private
         }
 
         launchDataCache.addAll(launchLibraryList)
-        log.info("finished executing cronjob")
+        log.info("[CRONJOB] finished executing cronjob")
         return launchLibraryList
     }
 
     @Scheduled(fixedDelay = 43200000, initialDelay = 10000)
     fun checkDailyLaunches() {
-        log.info("checking daily launches")
+        log.info("[DAILY] checking daily launches")
         val launches = launchDataCache.getAllLaunches()
-        dailyLaunches = launches?.filter { it.net.isEqual(LocalDateTime.now(ZoneOffset.UTC)) }
-        dailyLaunches = listOf(launches?.first()?: LaunchData())
-        log.info("these are the daily launches: ${dailyLaunches?.map { it.name }}")
+        dailyLaunches = launches?.filter { it.net.dayOfMonth == LocalDateTime.now(ZoneOffset.UTC).dayOfMonth }
+        log.info("[DAILY] these are the daily launches: ${dailyLaunches?.map { it.name }}")
     }
 
     @Scheduled(fixedDelay = 60000, initialDelay = 15000)
     fun validateNet() {
         dailyLaunches?.forEach {
-            log.info("validating net")
             val timeLeftMinutes = dateParser.getTimeLeft(it.net, LocalDateTime.now(ZoneOffset.UTC), TimeUnit.MINUTES)
             if (timeLeftMinutes <= 60) {
+                log.info("[DAILY][UPDATE] Time till launch $timeLeftMinutes, updating cache.")
                 getLaunchDataCronJob()
             }
-            log.info("net validated")
         }
     }
 }

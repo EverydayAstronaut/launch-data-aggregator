@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.openfeign.EnableFeignClients
 import org.springframework.scheduling.annotation.EnableScheduling
+import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 
 @SpringBootApplication(scanBasePackages=[
@@ -12,9 +13,11 @@ import org.springframework.scheduling.annotation.EnableScheduling
 	"com.launchAggregator.aggregator.dao",
 	"com.launchAggregator.aggregator.model",
 	"com.launchAggregator.aggregator.util",
-	"com.launchAggregator.aggregator.web"
+	"com.launchAggregator.aggregator.web",
+	"com.launchAggregator.aggregator.config"
 ])
 @EnableFeignClients
+@EnableSwagger2
 @EnableScheduling
 class AggregatorApplication
 

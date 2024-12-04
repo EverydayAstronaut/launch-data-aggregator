@@ -10,5 +10,6 @@ data class LaunchData(
         val location: Location = Location(),
         var missions: List<Mission> = listOf(),
         val rocket: Rocket = Rocket(),
-        var recovery: Recovery = Recovery()
+        var recovery: Recovery = Recovery(),
+        var ttl: Int = -1
 )
